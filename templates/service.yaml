@@ -1,0 +1,25 @@
+# For performance reasons, you may want to split the service into two services.
+# One called crate-discovery to handle the discovery typically on port 4300 and
+# another one for the rest of functions (admin, postgres, etc). This is because
+# Performance Issues have been seen with the discovery service behind load
+# balancers. See: https://github.com/helm/charts/pull/8432
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.service.name }}
+  labels:
+    app: {{ .Values.app }}
+spec:
+  # A Headless Service is used for CrateDB node discovery.
+  # Returns the IP adresses of the associated CrateDB Pods.
+  #clusterIP: None
+  type: ClusterIP
+  ports:
+    - name: psql
+      port: {{ .Values.service.ports.psql }}
+    - name: transport
+      port: 4300
+    - name: ui
+      port: {{ .Values.service.ports.ui }}
+  selector:
+    app: {{ .Values.app }}

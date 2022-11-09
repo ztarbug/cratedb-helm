@@ -1,0 +1,43 @@
+app: crate
+
+crate:
+  clusterName: null
+  heapSize: 1.0  # GiB
+  numberOfNodes: 2
+  recoverAfterNodes: null
+
+http:
+  cors:
+    allowOrigin: "*"
+    enabled: false
+
+image:
+  tag: 5.0.0
+
+persistentVolume:
+  annotations: {}
+  accessModes:
+    - ReadWriteOnce
+  enabled: true
+  size: 10Gi
+  #storageClass: local-path
+
+resources:
+  limits:
+    cpu: 1
+    memory: null
+  requests:
+    cpu: 500m
+
+service:
+  name: crate
+  ports:
+    psql: 5432
+    ui: 4200
+
+ingress:
+  name: crate-ingress
+  enabled: true
+  hosts:
+    - host: localhost
+      paths: ["/"]

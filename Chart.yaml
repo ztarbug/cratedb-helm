@@ -1,0 +1,9 @@
+apiVersion: v3
+name: crate
+version: 0.0.1
+description: CrateDB is a distributed SQL database. This Helm chart deploys a CrateDB cluster to Kubernetes.
+appVersion: 5.0
+home: https://crate.io
+icon: https://crate.io/docs/crate/tutorials/en/latest/_static/images/crate-logo.svg
+sources:
+  - https://github.com/crate/crate
